@@ -2196,6 +2196,18 @@ and dependencies (minified).
 			}
 		},
 		/* -------------------- */
+
+		/* synchronousScrollBlock */
+        _original_scrollTo = _scrollTo,
+		_scrollTo = function (el,to,options) {
+			_original_scrollTo(el,to,options);
+
+			var synchronousScrollBlock = el.data('synchronousScrollBlock');
+			if (synchronousScrollBlock) {
+				_original_scrollTo(synchronousScrollBlock, to, options);
+			}
+        },
+		/* -------------------- */
 		
 		
 		/* 
