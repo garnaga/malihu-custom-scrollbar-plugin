@@ -2202,11 +2202,13 @@
       _scrollTo = function (el,to,options) {
         _original_scrollTo(el,to,options);
 
-        var synchronousScrollBlock = el.data('synchronousScrollBlock');
-        if (synchronousScrollBlock.hasClass('mCustomScrollbar')) {
-          to = synchronousScrollBlock.find(".mCSB_container").height()/el.find(".mCSB_container").height()*to;
-          _original_scrollTo(synchronousScrollBlock, to, options);
-        }
+        el.data('synchronousScrollBlock').each(function (i, _el) {
+					var synchronousScrollBlock = $(_el);
+          if (synchronousScrollBlock.hasClass('mCustomScrollbar')) {
+            to = synchronousScrollBlock.find(".mCSB_container").height()/el.find(".mCSB_container").height()*to;
+            _original_scrollTo(synchronousScrollBlock, to, options);
+          }
+        });
       },
 			/* -------------------- */
 
